@@ -1,0 +1,20 @@
+on_minikube: true
+image:
+  fluent_bit:
+    tag: 1.4
+backend:
+  type: es
+  es:
+    host: logs-es-http.platform.svc.cluster.local
+    logstash_prefix: container_logs
+    http_user: elastic
+    http_passwd_secret: logs-es-elastic-user
+    http_passwd_secret_key: elastic
+    tls: "on"
+    tls_verify: "off"
+    replace_dots: "true"
+  filter:
+    mergeLogKey: log_entry
+    mergeJSONLog: "true"
+    enableParser: "true"
+

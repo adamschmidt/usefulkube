@@ -1,0 +1,11 @@
+apiVersion: apm.k8s.elastic.co/v1
+kind: ApmServer
+metadata:
+  name: {{ include "logs.fullname" . }}
+  labels:
+    {{- include "logs.labels" . | nindent 4 }}
+spec:
+  version: {{ .Chart.AppVersion }}
+  count: 1
+  elasticsearchRef:
+    name: {{ include "logs.fullname" . }}
